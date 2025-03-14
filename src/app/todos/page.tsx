@@ -32,7 +32,7 @@ const TodosPage = () => {
     <div>
       <h1>Todos</h1>
       <h2>해야할 일</h2>
-      <ul>
+      <ul className="border-2 p-4">
         {todosList.map((todo) => (
           <li key={todo.id}>
             <h3>{todo.title}</h3>
