@@ -25,11 +25,25 @@ const TodosPage = () => {
     return <div>할 일 목록이 없습니다!</div>;
   }
 
+  const todosList = todos.filter((todo) => todo.completed === false);
+  const completedList = todos.filter((todo) => todo.completed === true);
+
   return (
     <div>
       <h1>Todos</h1>
+      <h2>해야할 일</h2>
       <ul>
-        {todos.map((todo) => (
+        {todosList.map((todo) => (
+          <li key={todo.id}>
+            <h3>{todo.title}</h3>
+            <p>{todo.contents}</p>
+            <p>{todo.completed ? "완료됨" : "미완료됨"}</p>
+          </li>
+        ))}
+      </ul>
+      <h2>완료된 일</h2>
+      <ul>
+        {completedList.map((todo) => (
           <li key={todo.id}>
             <h3>{todo.title}</h3>
             <p>{todo.contents}</p>
