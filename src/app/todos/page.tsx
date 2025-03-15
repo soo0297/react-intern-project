@@ -12,6 +12,8 @@ type Todo = {
 
 const TodosPage = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -28,23 +30,53 @@ const TodosPage = () => {
   const todosList = todos.filter((todo) => todo.completed === false);
   const completedList = todos.filter((todo) => todo.completed === true);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const response = await axios.post("http://localhost:4000/todos", {
+      title: title,
+      contents: contents,
+      completed: false,
+    });
+
+    setTodos([...todos, response.data]);
+  };
+
   return (
     <div>
       <h1>Todos</h1>
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="제목"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="내용"
+          value={contents}
+          onChange={(e) => setContents(e.target.value)}
+        />
+        <button>추가</button>
+      </form>
+
       <h2>해야할 일</h2>
-      <ul className="border-2 p-4">
+      <ul className="border-2 border-gray-300 rounded-md p-4">
         {todosList.map((todo) => (
-          <li key={todo.id}>
+          <li key={todo.id} className="border p-2">
             <h3>{todo.title}</h3>
             <p>{todo.contents}</p>
             <p>{todo.completed ? "완료됨" : "미완료됨"}</p>
           </li>
         ))}
       </ul>
+
       <h2>완료된 일</h2>
-      <ul>
+      <ul className="border-2 border-gray-300 rounded-md p-4">
         {completedList.map((todo) => (
-          <li key={todo.id}>
+          <li key={todo.id} className="border p-2">
             <h3>{todo.title}</h3>
             <p>{todo.contents}</p>
             <p>{todo.completed ? "완료됨" : "미완료됨"}</p>
