@@ -2,7 +2,7 @@
 
 import InputForm from "@/components/InputForm";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchTodos, deleteTodo, toggleTodo, Todo } from "@/api/todos"; // ✅ Todo 타입 가져오기
+import { fetchTodos, deleteTodo, toggleTodo, Todo } from "@/api/todos";
 
 const TodosPage = () => {
   const queryClient = useQueryClient();

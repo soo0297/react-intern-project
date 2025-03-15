@@ -9,12 +9,12 @@ export type Todo = {
 };
 
 export const fetchTodos = async (): Promise<Todo[]> => {
-  const response = await axios.get("http://localhost:4000/todos");
+  const response = await axios.get("http://localhost:3000/todos");
   return response.data;
 };
 
 export const addTodo = async (newTodo: Omit<Todo, "id" | "completed">) => {
-  const response = await axios.post("http://localhost:4000/todos", {
+  const response = await axios.post("http://localhost:3000/todos", {
     ...newTodo,
     completed: false,
   });
@@ -22,11 +22,11 @@ export const addTodo = async (newTodo: Omit<Todo, "id" | "completed">) => {
 };
 
 export const deleteTodo = async (todoId: string) => {
-  await axios.delete(`http://localhost:4000/todos/${todoId}`);
+  await axios.delete(`http://localhost:3000/todos/${todoId}`);
 };
 
 export const toggleTodo = async (todo: Todo) => {
-  await axios.patch(`http://localhost:4000/todos/${todo.id}`, {
+  await axios.patch(`http://localhost:3000/todos/${todo.id}`, {
     completed: !todo.completed,
   });
 };
