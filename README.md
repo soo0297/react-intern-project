@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo_List_Project
 
-## Getting Started
+### [ 투두리스트 웹 개발 프로젝트 ](https://todolist-project-ten.vercel.app/)
 
-First, run the development server:
+## 📖 목차
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. [프로젝트 소개](#프로젝트-소개)
+2. [요구기술](#요구기술)
+3. [개발기간](#개발기간)
+4. [기술스택](#기술스택)
 
-Open [http://:3000](http://:3000) with your browser to see the result.
+## 👨‍🏫 프로젝트 소개
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[바로인턴_10기] 프론트엔드(React) 직무 과제
+: 이 과제의 목표는 Next.js(App Router), TypeScript, Tanstack Query(react-query) 등을 활용해 투두 리스트 애플리케이션을 처음부터 직접 구현해 보는 것입니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📖 요구 기술
 
-## Learn More
+#### 1. **TypeScript**
 
-To learn more about Next.js, take a look at the following resources:
+    - 인터페이스 등을 통해 타입 안전성을 확보
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### 2. **Next.js(App Router)**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    - 라우팅 구조 구성
 
-## Deploy on Vercel
+#### 3. **Tanstack Query(react-query)**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    - 서버 상태 로직 분리, 쿼리 무효화(`invalidateQueries`) 구현
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### 4. **Tailwind CSS**
+
+    - 반응형을 고려한 UI 스타일링
+
+#### 5. **json-server**
+
+    - 로컬에서 REST API 서버를 간단히 구동하기 위함
+
+## ⏲️ 개발기간
+
+- 2025.03.14(금) ~ 2025.03.15(토)
+
+## 📚️ 기술스택
+
+### ✔️ Language
+
+![Javascript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
+
+### ✔️ Version Control(버전관리)
+
+Git을 이용한 분산버전관리(DVCS)
+
+![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+
+### ✔️ IDE(통합개발환경)
+
+![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+
+### ✔️ Framework
+
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black), ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white)
+
+### ✔️ Deploy
+
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white), ![Glitch](https://img.shields.io/badge/glitch-3333FF?style=for-the-badge&logo=glitch&logoColor=white)
