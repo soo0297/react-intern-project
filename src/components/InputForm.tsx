@@ -1,6 +1,6 @@
+import { Todo } from "@/app/page";
 import axios from "axios";
 import React, { useState } from "react";
-import { Todo } from "../page";
 
 const InputForm = ({
   todos,
