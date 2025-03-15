@@ -1,61 +1,41 @@
 "use client";
 
 import InputForm from "@/components/InputForm";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-
-export type Todo = {
-  id: string;
-  title: string;
-  contents: string;
-  completed: boolean;
-};
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { fetchTodos, deleteTodo, toggleTodo, Todo } from "@/api/todos"; // ✅ Todo 타입 가져오기
 
 const TodosPage = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const fetchTodos = async () => {
-      const response = await axios.get("http://localhost:4000/todos");
-      setTodos(response.data);
-    };
-    fetchTodos();
-  }, []);
+  const { data: todos = [], isLoading } = useQuery<Todo[]>({
+    queryKey: ["todos"],
+    queryFn: fetchTodos,
+  });
 
-  if (!todos) {
-    return <div>할 일 목록이 없습니다!</div>;
-  }
+  const deleteTodoMutation = useMutation({
+    mutationFn: deleteTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
 
-  const todosList = todos.filter((todo) => todo.completed === false);
-  const completedList = todos.filter((todo) => todo.completed === true);
+  const toggleTodoMutation = useMutation({
+    mutationFn: toggleTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
 
-  const handleDelete = async (todoId: string) => {
-    await axios.delete(`http://localhost:4000/todos/${todoId}`);
+  if (isLoading) return <div>로딩 중...</div>;
 
-    setTodos((prev) => prev.filter((todo) => todo.id !== todoId));
-  };
-
-  const handleSwitch = async (todo: Todo) => {
-    await axios.patch(`http://localhost:4000/todos/${todo.id}`, {
-      completed: !todo.completed,
-    });
-
-    setTodos((prev) =>
-      prev.map((t) => {
-        if (t.id === todo.id) {
-          return { ...todo, completed: !todo.completed };
-        } else {
-          return t;
-        }
-      })
-    );
-  };
+  const todosList = todos.filter((todo) => !todo.completed);
+  const completedList = todos.filter((todo) => todo.completed);
 
   return (
     <div>
       <h1>Todos</h1>
 
-      <InputForm todos={todos} setTodos={setTodos} />
+      <InputForm />
 
       <h2>해야할 일</h2>
       <ul className="border-2 border-gray-300 rounded-md p-4">
@@ -63,11 +43,16 @@ const TodosPage = () => {
           <li key={todo.id} className="border p-2">
             <h3>{todo.title}</h3>
             <p>{todo.contents}</p>
-            <p>{todo.completed ? "완료됨" : "미완료됨"}</p>
-            <button className="border" onClick={() => handleDelete(todo.id)}>
+            <button
+              className="border"
+              onClick={() => deleteTodoMutation.mutate(todo.id)}
+            >
               삭제
             </button>
-            <button className="border" onClick={() => handleSwitch(todo)}>
+            <button
+              className="border"
+              onClick={() => toggleTodoMutation.mutate(todo)}
+            >
               완료
             </button>
           </li>
@@ -80,11 +65,16 @@ const TodosPage = () => {
           <li key={todo.id} className="border p-2">
             <h3>{todo.title}</h3>
             <p>{todo.contents}</p>
-            <p>{todo.completed ? "완료됨" : "미완료됨"}</p>
-            <button className="border" onClick={() => handleDelete(todo.id)}>
+            <button
+              className="border"
+              onClick={() => deleteTodoMutation.mutate(todo.id)}
+            >
               삭제
             </button>
-            <button className="border" onClick={() => handleSwitch(todo)}>
+            <button
+              className="border"
+              onClick={() => toggleTodoMutation.mutate(todo)}
+            >
               취소
             </button>
           </li>

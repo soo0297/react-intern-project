@@ -1,27 +1,24 @@
-import { Todo } from "@/app/page";
-import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addTodo } from "@/api/todos";
 
-const InputForm = ({
-  todos,
-  setTodos,
-}: {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-}) => {
+const InputForm = () => {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const queryClient = useQueryClient();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const addMutation = useMutation({
+    mutationFn: addTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      setTitle("");
+      setContents("");
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const response = await axios.post("http://localhost:4000/todos", {
-      title: title,
-      contents: contents,
-      completed: false,
-    });
-
-    setTodos([...todos, response.data]);
+    addMutation.mutate({ title, contents });
   };
 
   return (
