@@ -2,8 +2,9 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import InputForm from "./(components)/InputForm";
 
-type Todo = {
+export type Todo = {
   id: string;
   title: string;
   contents: string;
@@ -12,8 +13,6 @@ type Todo = {
 
 const TodosPage = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -29,18 +28,6 @@ const TodosPage = () => {
 
   const todosList = todos.filter((todo) => todo.completed === false);
   const completedList = todos.filter((todo) => todo.completed === true);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const response = await axios.post("http://localhost:4000/todos", {
-      title: title,
-      contents: contents,
-      completed: false,
-    });
-
-    setTodos([...todos, response.data]);
-  };
 
   const handleDelete = async (todoId: string) => {
     await axios.delete(`http://localhost:4000/todos/${todoId}`);
@@ -63,21 +50,7 @@ const TodosPage = () => {
     <div>
       <h1>Todos</h1>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="제목"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="내용"
-          value={contents}
-          onChange={(e) => setContents(e.target.value)}
-        />
-        <button>추가</button>
-      </form>
+      <InputForm todos={todos} setTodos={setTodos} />
 
       <h2>해야할 일</h2>
       <ul className="border-2 border-gray-300 rounded-md p-4">
