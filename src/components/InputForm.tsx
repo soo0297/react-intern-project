@@ -22,20 +22,25 @@ const InputForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="flex justify-center items-center gap-3"
+    >
       <input
         type="text"
         placeholder="제목"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        className="text-center border-b-2 border-white rounded-lg"
       />
       <input
         type="text"
         placeholder="내용"
         value={contents}
         onChange={(e) => setContents(e.target.value)}
+        className="text-center border-b-2 border-white rounded-lg"
       />
-      <button>추가</button>
+      <button className="bg-white w-12 h-8 rounded-lg">추가</button>
     </form>
   );
 };

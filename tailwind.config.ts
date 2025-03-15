@@ -9,7 +9,6 @@ const config: Config = {
       screens: {
         sm: "320px", // 모바일 (기본값)
         md: "420px", // 넓은 모바일
-        lg: "768px", // 태블릿
         xl: "1024px", // 데스크톱
       },
     },
