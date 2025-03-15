@@ -9,24 +9,32 @@ export type Todo = {
 };
 
 export const fetchTodos = async (): Promise<Todo[]> => {
-  const response = await axios.get("http://localhost:3000/todos");
+  const response = await axios.get(
+    "https://brawny-climbing-ghoul.glitch.me/todos"
+  );
   return response.data;
 };
 
 export const addTodo = async (newTodo: Omit<Todo, "id" | "completed">) => {
-  const response = await axios.post("http://localhost:3000/todos", {
-    ...newTodo,
-    completed: false,
-  });
+  const response = await axios.post(
+    "https://brawny-climbing-ghoul.glitch.me/todos",
+    {
+      ...newTodo,
+      completed: false,
+    }
+  );
   return response.data;
 };
 
 export const deleteTodo = async (todoId: string) => {
-  await axios.delete(`http://localhost:3000/todos/${todoId}`);
+  await axios.delete(`https://brawny-climbing-ghoul.glitch.me/todos/${todoId}`);
 };
 
 export const toggleTodo = async (todo: Todo) => {
-  await axios.patch(`http://localhost:3000/todos/${todo.id}`, {
-    completed: !todo.completed,
-  });
+  await axios.patch(
+    `https://brawny-climbing-ghoul.glitch.me/todos/${todo.id}`,
+    {
+      completed: !todo.completed,
+    }
+  );
 };
