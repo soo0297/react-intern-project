@@ -4,7 +4,7 @@
       "id": "1",
       "title": "TODO1",
       "contents": "sample contents1",
-      "completed": true
+      "completed": false
     },
     {
       "id": "2",
@@ -16,7 +16,7 @@
       "id": "53df",
       "title": "TODO3",
       "contents": "해야할 일",
-      "completed": false
+      "completed": true
     }
   ]
 }

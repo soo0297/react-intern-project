@@ -31,6 +31,7 @@ const TodosPage = () => {
 
   const handleDelete = async (todoId: string) => {
     await axios.delete(`http://localhost:4000/todos/${todoId}`);
+
     setTodos((prev) => prev.filter((todo) => todo.id !== todoId));
   };
 
@@ -40,8 +41,12 @@ const TodosPage = () => {
     });
 
     setTodos((prev) =>
-      prev.map((todo) => {
-        return { ...todo, completed: !todo.completed };
+      prev.map((t) => {
+        if (t.id === todo.id) {
+          return { ...todo, completed: !todo.completed };
+        } else {
+          return t;
+        }
       })
     );
   };
