@@ -42,6 +42,11 @@ const TodosPage = () => {
     setTodos([...todos, response.data]);
   };
 
+  const handleDelete = async (todoId: string) => {
+    await axios.delete(`http://localhost:4000/todos/${todoId}`);
+    setTodos((prev) => prev.filter((todo) => todo.id !== todoId));
+  };
+
   return (
     <div>
       <h1>Todos</h1>
@@ -69,6 +74,9 @@ const TodosPage = () => {
             <h3>{todo.title}</h3>
             <p>{todo.contents}</p>
             <p>{todo.completed ? "완료됨" : "미완료됨"}</p>
+            <button className="border" onClick={() => handleDelete(todo.id)}>
+              삭제
+            </button>
           </li>
         ))}
       </ul>
@@ -80,6 +88,9 @@ const TodosPage = () => {
             <h3>{todo.title}</h3>
             <p>{todo.contents}</p>
             <p>{todo.completed ? "완료됨" : "미완료됨"}</p>
+            <button className="border" onClick={() => handleDelete(todo.id)}>
+              삭제
+            </button>
           </li>
         ))}
       </ul>
