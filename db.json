@@ -22,31 +22,19 @@
       "id": "2ebe",
       "title": "공부",
       "contents": "프로젝트 만들기",
-      "completed": false
+      "completed": true
     },
     {
       "id": "8dce",
       "title": "취준",
       "contents": "자소서 쓰기",
-      "completed": false
+      "completed": true
     },
     {
       "id": "94ae",
       "title": "취준",
       "contents": "자소서 첨삭받기",
       "completed": false
-    },
-    {
-      "id": "3c75",
-      "title": "취준",
-      "contents": "이력서 파일 만들기",
-      "completed": true
-    },
-    {
-      "id": "eb25",
-      "title": "취준",
-      "contents": "선호기업 확인하기",
-      "completed": true
     },
     {
       "id": "2306",
